@@ -1,0 +1,41 @@
+<div class="container ">
+    <div class="row ">
+        <div class="col-1 col-sm-3">
+        </div>
+        <div class="col-10 col-sm-5 mt-5 bg-dark bg-opacity-10 rounded shadow">
+            <form class="m-2" [formGroup]="loginForm">
+                <h2 class="text-center text-primary">Welcome back</h2>
+                <h3 class="text-center text-primary">Login to your account</h3>
+                <br>
+                <div>
+                    <input class="rounded  form-control" name="Email" type="email" formControlName="email"
+                        placeholder="Enter your email"
+                        [ngClass]="{'is-invalid':(submited &&loginForm.controls['email'].invalid) || (loginForm.controls['email'].invalid && loginForm.controls['email'].touched) ,'is-valid':loginForm.controls['email'].valid}"
+                        required>
+                    <small class="text-left text-danger invalid-feedback">Enter Valid email*</small>
+                </div>
+                <div>
+                    <input class="mt-4 rounded  form-control" name="password" type="password" formControlName="password"
+                        placeholder="Enter your password"
+                        [ngClass]="{'is-invalid':(submited && loginForm.controls['email'].invalid)|| (loginForm.controls['password'].invalid && loginForm.controls['password'].touched),'is-valid':loginForm.controls['password'].valid}"
+                        required>
+                    <small class="text-danger invalid-feedback">Enter valid password*</small><br>
+                    <div class="text-center">
+                        <small class="text-danger">{{message}}</small><br>
+                        <button class="loginbtn btn btn-danger px-5" type="submit" (click)="goHome()">Login</button>
+                    </div>
+                    <br>
+                    <div class="text-center"><a class="link-success " routerLink="/forgotPassword">Forgot password?</a>
+                    </div>
+                </div>
+                <br>
+                <p class="text-center  text-dark"> Don't have an account yet? <a class="link-success"
+                        routerLink="/signUp">Sign up</a> </p>
+            </form>
+
+        </div>
+        <div class="col-1 col-sm-4">
+
+        </div>
+    </div>
+</div>

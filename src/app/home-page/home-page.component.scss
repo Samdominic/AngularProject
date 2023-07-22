@@ -1,0 +1,108 @@
+// .main {
+//     width: 100%;
+//     height: 850px;
+// }
+
+// a {
+//     padding: 20px;
+//     color: white;
+//     text-decoration: none;
+// }
+
+// a:hover {
+//     color: black;
+//     background-color: red;
+// }
+
+// a:active {
+//     background-color: red;
+// }
+
+// nav {
+//     float: right;
+//     margin-top: 20px;
+// }
+
+// 
+
+
+.content {
+    border-top: 0;
+    height: 850px;
+    width: 100%;
+    background-image: url("../../assets/images/work-from-home-illustration-with-copy-space-man-working-with-laptop-desktop-flat-design_115968-28.webp");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#achiveimg {
+    position: absolute;
+    top: 550px;
+    height: 300px;
+    width: 300px;
+    left: 20px;
+}
+.container {
+    text-align: center;
+    width: 90%;
+    margin-top: 100px;
+    height: 500px;
+}
+
+.address {
+    position: relative;
+    top: -420px;
+    padding: 40px;
+    color: white;
+}
+#add {
+    top: -450px;
+    left: 155px;
+}
+#gmailadd{
+    left: 195px;
+}
+#add1 {
+    top: -480px;
+    left: 150px;
+}
+
+.container1 {
+    width: 100%;
+    height: 1200px;
+    background-image: url("../../assets/images/81792302-back-view-of-young-businessman-looking-at-creative-business-sketch-on-city-background-startup-target.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-top: 300px;
+}
+
+.footer {
+    width: 60%;
+    margin-top: 38.5%;
+    margin-left: 10%;
+    // background-color: rgb(9, 107, 107);
+    color: white;
+}
+
+// p {
+//     background-color: rgb(192, 62, 39);
+// }
+
+// button {
+//     padding: 7px;
+//     background-color: rgb(216, 20, 79);
+//     border-color: antiquewhite;
+//     color: rgb(255, 238, 0);
+// }
+// .readMore:hover{
+//   background-color: darkgray;
+//   color: black;
+// }
+// .welcome{
+//     animation: heading 9s infinite linear;
+// }
+// @keyframes heading {
+//     0%{margin-left: -20px;color: red;}
+//     35%{margin-left: 10%;color: blue;}
+//     70%{text-align: center;color: deeppink;}
+// }

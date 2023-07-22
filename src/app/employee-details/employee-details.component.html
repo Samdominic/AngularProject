@@ -1,0 +1,226 @@
+<div class="mt-5">
+    <app-top-bar></app-top-bar>
+        <div class="row w-100">
+            <div class="col-1 col-sm-2">
+
+            </div>
+            <div class="mt-5 col-10 col-sm-8">
+                <h2 class="text-center text-primary font-monospace p-2 bg-dark mb-0">Employee Details</h2>
+                <table  class="table table-danger table-striped text-center shadow">
+                    <thead>
+                        <tr class="table-info">
+                            <th>
+                                S.No
+                            </th>
+                            <th>
+                                Id
+                            </th>
+                            <th>
+                                First Name
+                            </th>
+                            <th>
+                                Last Name
+                            </th>
+                            <th>
+                                Gender
+                            </th>
+                            <th>
+                                DOB
+                            </th>
+                            <th>
+                                Email Id
+                            </th>
+                            <th>
+                                Action
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let emp of getData; index as userno ">
+                            <td>{{userno + 1}}</td>
+                            <td>{{emp.id}}</td>
+                            <td>{{emp.firstName}}</td>
+                            <td>{{emp.lastName}}</td>
+                            <td>{{emp.gender}}</td>
+                            <td>{{emp.dob}}</td>
+                            <td>{{emp.email}}</td>
+                            <td>
+                                <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#editModal"
+                                    type="button" (click)="onEdit(userno)">Edit</button>
+                                <button class="btn  btn-danger ms-2" type="submit" data-bs-toggle="modal"
+                                    data-bs-target="#deleteModal" (click)="getId(emp.id)">Delete</button>
+                                    <button class="btn btn-primary ms-2" data-bs-toggle="modal" data-bs-target="#changePassModal" (click)="changePass(emp.id)">Change password</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="col-1 col-sm-2">
+
+            </div>
+    </div>
+</div>
+<!-- <ng-template #edit>
+    <div class="container">
+    <div class="row">
+        <div class="col">
+
+        </div>
+        <div class="col bg-warning bg-opacity-50 mt-5 rounded">
+            <form class="m-2" [formGroup]="editEmpForm">
+                <br>
+                <h2 class="text-center">Edit Employee Details</h2>
+                <div class="row">
+                    <div class="col py-3">
+                        <input class="form-control" type="text" placeholder="Enter Your First Name" formControlName="firstName">
+                        <small class="text-danger"
+                            *ngIf="editEmpForm.controls['firstName'].touched && editEmpForm.controls['firstName'].invalid">Invalid
+                            FirstName*</small>
+                    </div>
+                    <div class="col py-3">
+                        <input class="form-control" type="text" placeholder="Enter Your Last Name" formControlName="lastName">
+                        <small class="text-danger"
+                            *ngIf="editEmpForm.controls['lastName'].touched && editEmpForm.controls['lastName'].invalid">Invalid
+                            LastName*</small>
+                    </div>
+                </div>
+                <div class="pb-3">
+                    <input class="form-control" type="text" placeholder="Enter Your Email" formControlName="email">
+                    <small class="text-danger"
+                        *ngIf="editEmpForm.controls['email'].touched && editEmpForm.controls['email'].invalid">Invalid
+                        Email*</small>
+                </div>
+                <div class="row pb-3" >
+                    <label class="col fs-8" for="gender">Gender :</label>
+                    <div class="col" *ngFor="let gender of genders">
+                        <input id="gender" type="radio" name="gender" [value]="gender"
+                            formControlName="gender">{{gender}}
+                    </div>
+                </div>
+                <div >
+                    <label class="fs-8" for="date">Date of Birth :</label>
+                    <input class="form-control" type="date" name="date" formControlName="dob">
+                </div>
+                <div class="text-center pt-3">
+                    <button class="btn btn-dark" type="submit" (click)="onSubmit()">Submit</button>
+                    <button class="btn btn-danger ms-1" type="submit" (click)="goBack()">Back</button>
+                </div>
+            </form>
+        </div>
+        <div class="col">
+
+        </div>
+    </div>
+</div>
+</ng-template> -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-dark ">
+                <h1 class="modal-title fs-3 text-danger font-monospace" id="editModalLabel">Asus Employee</h1>
+                <button type="button" class="btn-close bg-light" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body bg-light">
+
+                <form class="m-2" [formGroup]="editEmpForm">
+                    <h2 class="text-center">Edit Employee Details</h2>
+                    <div class="row">
+                        <div class="col py-3">
+                            <label class="fst-italic" for="firstName">FirstName :</label>
+                            <input id="firstName" class="form-control" type="text"  [ngClass]="{'is-invalid':(submited && editEmpForm.controls['firstName'].invalid)
+                ||(editEmpForm.controls['firstName'].touched && editEmpForm.controls['firstName'].invalid),'is-valid':editEmpForm.controls['firstName'].valid}" formControlName="firstName">
+                            <small class="text-danger invalid-feedback">Invalid FirstName*</small>
+                        </div>
+                        <div class="col py-3">
+                            <label class="fst-italic" for="lastName">LastName :</label>
+                            <input id="lastName" class="form-control" type="text"                            [ngClass]="{'is-invalid':(submited && editEmpForm.controls['lastName'].invalid)
+                ||(editEmpForm.controls['lastName'].touched && editEmpForm.controls['lastName'].invalid),'is-valid':editEmpForm.controls['lastName'].valid}" formControlName="lastName">
+                            <small class="text-danger invalid-feedback">Invalid LastName*</small>
+                        </div>
+                    </div>
+                    <div class="pb-3">
+                        <label class="fst-italic" for="email">Email :</label>
+                        <input id="email" class="form-control" type="text"                        [ngClass]="{'is-invalid':(submited && editEmpForm.controls['email'].invalid)
+            ||(editEmpForm.controls['email'].touched && editEmpForm.controls['email'].invalid),'is-valid':editEmpForm.controls['email'].valid}" formControlName="email">
+                        <small class="text-danger invalid-feedback">Invalid Email*</small>
+                    </div>
+                    <div class="row pb-3">
+                        <label class="fst-italic" for="gender">Gender :
+                            <!-- <input id="gender" type="radio" name="gender" [ngModel]="gen"  [value]="gender"
+                 [ngClass]="{'is-invalid':(submited && editEmpForm.controls['firstName'].invalid)
+                ||(editEmpForm.controls['firstName'].touched && editEmpForm.controls['firstName'].invalid),'is-valid':editEmpForm.controls['firstName'].valid}" formControlName="gender">{{gender}} -->
+                            <select class="form-select form-control" name="gender" formControlName="gender"
+                                 [ngClass]="{'is-valid':editEmpForm.controls['gender'].valid}">
+                                <option *ngFor="let gender of genders" [value]="gender">{{gender}}</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div>
+                        <label class="fst-italic" for="date">Date of Birth :</label>
+                        <input class="form-control" type="date" name="date" 
+                            [ngClass]="{'is-valid':editEmpForm.controls['dob'].valid}" formControlName="dob">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer bg-light">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="onSubmit()">Save
+                    changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade " id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content text-danger">
+            <div class="modal-header bg-dark">
+                <h1 class="modal-title fs-5" id="deleteModalLabel">Delete Details</h1>
+                <button type="button" class="btn-close bg-light" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body bg-light">
+                <h5>Are you want to confirm delete details?</h5>
+            </div>
+            <div class="modal-footer bg-light">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                    (click)="onDelete()">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="changePassModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-dark">
+                <h2 class="modal-title font-monospace  text-danger">Asus Employee</h2>
+                <button type="button" class="btn-close bg-light" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body bg-light p-4">
+            <form [formGroup]="changePassForm">
+                <h2 class="modal-title fst-italic fs-4 text-secondary text-center">Change Password</h2> <br>
+                <div>
+                    <input class="form-control" formControlName="oldPass" type="password" placeholder="Enter your old password" [ngClass]="{'is-invalid':(submited1 && changePassForm.controls['oldPass'].invalid)
+                    ||(changePassForm.controls['oldPass'].invalid && changePassForm.controls['oldPass'].touched),'is-valid':changePassForm.controls['oldPass'].valid}">
+                    <small class="invalid-feedback">Enter valid password*</small>
+                </div>
+                    <pre></pre>
+                    <input class="form-control" formControlName="newPass" type="password" placeholder="Enter your new password"[ngClass]="{'is-invalid':(submited1 && changePassForm.controls['newPass'].invalid)
+                    ||(changePassForm.controls['newPass'].invalid && changePassForm.controls['newPass'].touched),'is-valid':changePassForm.controls['newPass'].valid}">
+                    <small class="text-danger invalid-feedback">(Your password must be at least 6 characters long. Please try another.) *</small>
+                    <div class="text-center">
+                    <small class="text-danger">{{message}}</small>
+                </div>
+                </form>
+            </div>
+            <div class="modal-footer bg-light">
+                <small class="me-4 fs-5 fst-italic text-success">{{message1}}</small>
+             <button class="btn btn-dark" data-bs-dismiss="modal">Cancel</button>
+             <button class="btn btn-danger"(click)="confirmChangePass()">Submit</button>
+            </div>
+        </div>
+
+    </div>
+</div>
